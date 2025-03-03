@@ -1,0 +1,115 @@
+name: John Doe
+prof_suffix:
+  - B.Sc.
+  - M.Sc.
+headline: Junior Front-End Developer
+region: San Francisco, CA
+email: johndoe@example.com
+phone: +1555-555-5555
+website: 
+  url: https://johndoe.example
+socials:
+  - platform: GitHub
+    url: https://notgithub.com/johndoe
+    username: johndoe
+  - platform: LinkedIn
+    url: https://notlinkedin.com/in/johndoe
+    username: johndoe
+
+summary:
+  - overview: 
+      Enthusiastic front-end developer with a strong foundation in JavaScript frameworks, 
+      responsive design, and performance optimization. Passionate about creating engaging 
+      user experiences through modern web technologies.
+
+  - subjects:
+    - subject: Web Development
+      description: Skilled in building responsive and dynamic web applications using modern JavaScript frameworks.
+
+    - subject: JavaScript Frameworks
+      description: Proficient in React.js and Vue.js, implementing reusable components for scalable applications.
+
+    - subject: UI/UX Design
+      description: Experienced in Figma and Adobe XD, translating design concepts into functional web interfaces.
+
+    - subject: Version Control & CI/CD
+      description: Hands-on experience with Git, GitHub, and CI/CD pipelines for automated deployments.
+
+education:
+  - institution: University of California, Berkeley
+    location: Berkeley, CA
+    degree: Master of Science in Computer Science
+    details: Specialized in web technologies, human-computer interaction, and software development.
+    start_date: 2018-09-01
+    end_date: 2020-06-15
+
+  - institution: Stanford University
+    location: Stanford, CA
+    degree: Bachelor of Science in Software Engineering
+    details: Focused on front-end development, UX design, and cloud computing.
+    start_date: 2014-09-01
+    end_date: 2018-06-15
+
+experience:  
+  - company: Tech Innovations Inc.
+    type: Full-time
+    location: San Francisco, CA
+    title: Junior Front-End Developer
+    description: Developed modern web applications and improved front-end performance through optimization strategies.
+    duties: 
+      - Built interactive UI components using React.js and Tailwind CSS.
+      - Implemented lazy loading and caching techniques to enhance website performance.
+    start_date: 2022-07-01
+    end_date: "Present"
+    skills:
+      - JavaScript
+      - React.js
+      - Tailwind CSS
+      - Performance Optimization
+      - Git
+
+  - company: CodeCraft Solutions
+    type: Internship
+    location: San Francisco, CA
+    title: Front-End Developer Intern
+    description: Assisted in the development of a company dashboard using Vue.js and API integrations.
+    duties:
+      - Refactored legacy code to improve maintainability.
+      - Integrated RESTful APIs for real-time data updates.
+    start_date: 2021-06-01
+    end_date: 2021-09-01
+    skills:
+      - Vue.js
+      - HTML5 & CSS3
+      - Web Performance Optimization
+
+certifications:
+  - name: JavaScript Developer Certification
+    authority: W3Schools
+    issue_date: 2020-10-05
+    cred_url: https://www.w3schools.com/certification
+
+skills:
+  - category: Programming Languages
+    items:
+      - JavaScript
+      - HTML5
+      - CSS3
+
+  - category: Frameworks & Libraries
+    items:
+      - React.js
+      - Vue.js
+      - Tailwind CSS
+
+  - category: Tools & Platforms
+    items:
+      - Git & GitHub
+      - Webpack
+      - CI/CD Pipelines
+
+  - category: Performance Optimization
+    items:
+      - Lazy Loading
+      - Code Splitting
+      - Caching Strategies

@@ -1,0 +1,163 @@
+{% include "shared/header.njk" %}
+
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container"></div>
+</nav>
+
+<div class="container my-5">
+  <!-- Header -->
+  <header class="mb-4">
+    <h1>{{ example_resume.name }}{% if example_resume.prof_suffix %}, {{ example_resume.prof_suffix | join(', ') }}{% endif %}</h1>
+    <h3 class="text-muted">{{ example_resume.headline }} | {{ example_resume.region }}</h3>
+
+    <div class="d-flex flex-column flex-md-row flex-wrap gap-3">
+      {% if example_resume.phone %}
+      <a href="tel:{{ example_resume.phone | replace(' ', '') }}" class="text-decoration-none d-flex align-items-center gap-2">
+        <i class="fa-solid fa-phone"></i>
+        {{ example_resume.phone }}
+      </a>
+      {% endif %}
+
+      {% if example_resume.website.url %}
+      <a href="{{ example_resume.website.url }}" target="_blank" class="text-decoration-none d-flex align-items-center gap-2">
+        <i class="fa-solid fa-globe"></i>
+        {{ example_resume.website.url | replace("https://", "") | replace("http://", "") }}
+      </a>
+      {% endif %}
+
+      <a href="mailto:{{ example_resume.email }}" class="text-decoration-none d-flex align-items-center gap-2">
+        <i class="fa-solid fa-envelope"></i>
+        {{ example_resume.email }}
+      </a>
+
+      {% for social in example_resume.socials %}
+      <a href="{{ social.url }}" target="_blank" class="text-decoration-none d-flex align-items-center gap-2">
+        {% if social.platform == "GitHub" %}
+        <i class="fa-brands fa-github"></i>
+        {% elseif social.platform == "LinkedIn" %}
+        <i class="fa-brands fa-linkedin"></i>
+        {% elseif social.platform == "Twitter" %}
+        <i class="fa-brands fa-x-twitter"></i>
+        {% elseif social.platform == "Instagram" %}
+        <i class="fa-brands fa-instagram"></i>
+        {% elseif social.platform == "Facebook" %}
+        <i class="fa-brands fa-facebook"></i>
+        {% elseif social.platform == "YouTube" %}
+        <i class="fa-brands fa-youtube"></i>
+        {% else %}
+        <i class="fa-solid fa-link"></i>
+        {% endif %}
+        {{ social.url | replace("https://", "") | replace("http://", "") }}
+      </a>
+      {% endfor %}
+    </div>
+  </header>
+
+  <!-- Summary -->
+  <section>
+    <h2 class="h4 border-bottom pb-2">Summary</h2>
+    {% for point in example_resume.summary %}
+    <p>{{ point.overview }}</p>
+    {% if point.subjects %}
+    <ul>
+      {% for subject in point.subjects %}
+      <li><strong>{{ subject.subject }}</strong>: {{ subject.description }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <!-- Experience & Skills -->
+  <section class="row gx-md-5">
+    <!-- Experience -->
+    <div class="col-md-7">
+      <h2 class="h4 border-bottom pb-2">Experience</h2>
+      {% for job in example_resume.experience %}
+      <h3 class="h5">{{ job.title }}</h3>
+      <div class="d-flex flex-column flex-md-row justify-content-between">
+        <strong>{{ job.company }}</strong>
+        <span class="text-muted">
+          <i class="fa-solid fa-location-dot"></i> {{ job.location }}  
+          <i class="fa-solid fa-calendar ms-2"></i> {{ job.start_date | formatDate('YYYY') }} - 
+          {% if job.end_date | objtype == 'object' %}
+            {{ job.end_date | formatDate('YYYY') }}
+          {% else %}
+            Present
+          {% endif %}
+        </span>
+      </div>
+      <p>{{ job.description }}</p>
+      <ul>
+        {% for duty in job.duties %}
+        <li>{{ duty }}</li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+
+    <!-- Skills -->
+    <div class="col-md-5">
+      <h2 class="h4 border-bottom pb-2">Skills</h2>
+      {% for skill_category in example_resume.skills %}
+      <h3 class="h6 mt-3">{{ skill_category.category }}</h3>
+      <ul class="list-unstyled">
+        {% for skill in skill_category.items %}
+        <li><i class="fa-solid fa-check"></i> {{ skill }}</li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Education & Certifications -->
+  <section class="row gx-md-5">
+    <!-- Education -->
+    <div class="col-md-7">
+      <h2 class="h4 border-bottom pb-2">Education</h2>
+      {% for edu in example_resume.education %}
+      <div class="mb-4"> 
+        <h3 class="h5 pb-2">{{ edu.degree }}</h3>
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+          <strong>{{ edu.institution }}</strong>
+          <span class="text-muted">
+            <i class="fa-solid fa-calendar"></i> {{ edu.start_date | formatDate('YYYY') }} - {{ edu.end_date | formatDate('YYYY') }}
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Certifications -->
+    <div class="col-md-5">
+      <h2 class="h4 border-bottom pb-2">Certifications</h2>
+      {% for cert in example_resume.certifications %}
+      <div class="mb-4"> 
+        <h3 class="h5 pb-2">{{ cert.name }}</h3>
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+          <strong>{{ cert.authority }}</strong>
+          <span class="text-muted">
+            <i class="fa-solid fa-calendar"></i> Issued: {{ cert.issue_date | formatDate('YYYY') }}
+          </span>
+        </div>
+        <p><a href="{{ cert.cred_url }}" target="_blank" class="text-decoration-none"><i class="fa-solid fa-link"></i> View Credential</a></p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+
+
+
+
+<!-- Resume Download Button  -->
+<button id="download-resume-pdf-{{ layout }}" class="btn btn-primary btn-lg position-fixed bottom-0 end-0 m-3 shadow-lg">
+  <i class="bi bi-download"></i> Download Resume
+</button>
+
+
+
+{% include "shared/footer.njk" %}
+<script src="./assets/main.js"></script>
