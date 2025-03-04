@@ -19,6 +19,7 @@ module.exports = function (eleventyConfig) {
     });
 
     eleventyConfig.addFilter('objtype', obj => typeof obj);
+    eleventyConfig.addGlobalData("buildDate", new Date().toISOString());
 
     // Load resume YAML manually and make it global
     const resumePath = path.join(__dirname, 'src/_data/example_resume.yml');

@@ -161,3 +161,9 @@
 
 {% include "shared/footer.njk" %}
 <script src="./assets/main.js"></script>
+
+
+  <div class="container py-2  my-0 border-top" id="footer">
+    <p class="text-start copyright">©{{ buildDate| formatDate('YYYY') }} {{ example_resume.name }} | This site was made with <a href="https://github.com/j8nn3str/resume.doc.web">resume.doc.web</a>.</p>
+    <canvas data-class="qr" data-qr-id="siteQR" data-qr-text="profile.j8nn3str.me" height="50" width="50" style="height: 50px; width: 50px;"></canvas>
+</div>
