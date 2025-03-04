@@ -7,9 +7,9 @@
     "start": "npm-run-all --parallel dev:*",
     "build": "run-s prod:_",
     "dev:eleventy": "eleventy --serve",
-    "dev:parcel": "parcel watch ./src/_assets/js/main.js --out-dir ./_site/assets",
+    "dev:parcel": "parcel watch ./src/_assets/js/main.js ./src/_assets/js/main__*.js --out-dir ./_site/assets",
     "prod:eleventy": "eleventy",
-    "prod:parcel": "parcel build ./src/_assets/js/main.js --out-dir ./_site/assets"
+    "prod:parcel": "parcel build ./src/_assets/js/main.js ./src/_assets/js/main__*.js --out-dir ./_site/assets"
   },
   "keywords": [],
   "author": "",

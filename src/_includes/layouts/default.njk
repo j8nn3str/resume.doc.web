@@ -8,50 +8,73 @@
 <div class="container my-5">
   <!-- Header -->
   <header class="mb-4">
-    <h1>{{ example_resume.name }}{% if example_resume.prof_suffix %}, {{ example_resume.prof_suffix | join(', ') }}{% endif %}</h1>
+    <h1>{{ example_resume.name }}{% if example_resume.prof_suffix %}, {{ example_resume.prof_suffix | join(', ') }}{%
+      endif %}</h1>
     <h3 class="text-muted">{{ example_resume.headline }} | {{ example_resume.region }}</h3>
 
-    <div class="d-flex flex-column flex-md-row flex-wrap gap-3">
-      {% if example_resume.phone %}
-      <a href="tel:{{ example_resume.phone | replace(' ', '') }}" class="text-decoration-none d-flex align-items-center gap-2">
-        <i class="fa-solid fa-phone"></i>
-        {{ example_resume.phone }}
-      </a>
-      {% endif %}
-
-      {% if example_resume.website.url %}
-      <a href="{{ example_resume.website.url }}" target="_blank" class="text-decoration-none d-flex align-items-center gap-2">
-        <i class="fa-solid fa-globe"></i>
-        {{ example_resume.website.url | replace("https://", "") | replace("http://", "") }}
-      </a>
-      {% endif %}
-
-      <a href="mailto:{{ example_resume.email }}" class="text-decoration-none d-flex align-items-center gap-2">
-        <i class="fa-solid fa-envelope"></i>
-        {{ example_resume.email }}
-      </a>
-
-      {% for social in example_resume.socials %}
-      <a href="{{ social.url }}" target="_blank" class="text-decoration-none d-flex align-items-center gap-2">
-        {% if social.platform == "GitHub" %}
-        <i class="fa-brands fa-github"></i>
-        {% elseif social.platform == "LinkedIn" %}
-        <i class="fa-brands fa-linkedin"></i>
-        {% elseif social.platform == "Twitter" %}
-        <i class="fa-brands fa-x-twitter"></i>
-        {% elseif social.platform == "Instagram" %}
-        <i class="fa-brands fa-instagram"></i>
-        {% elseif social.platform == "Facebook" %}
-        <i class="fa-brands fa-facebook"></i>
-        {% elseif social.platform == "YouTube" %}
-        <i class="fa-brands fa-youtube"></i>
-        {% else %}
-        <i class="fa-solid fa-link"></i>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="contactDropdown" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Contact Info
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="contactDropdown">
+        {% if example_resume.phone %}
+        <li>
+          <a class="dropdown-item d-flex align-items-center gap-2"
+            href="tel:{{ example_resume.phone | replace(' ', '') }}">
+            <i class="fa-solid fa-phone"></i>
+            {{ example_resume.phone }}
+          </a>
+        </li>
         {% endif %}
-        {{ social.url | replace("https://", "") | replace("http://", "") }}
-      </a>
-      {% endfor %}
+
+        {% if example_resume.website.url %}
+        <li>
+          <a class="dropdown-item d-flex align-items-center gap-2" href="{{ example_resume.website.url }}"
+            target="_blank">
+            <i class="fa-solid fa-globe"></i>
+            {{ example_resume.website.url | replace("https://", "") | replace("http://", "") }}
+          </a>
+        </li>
+        {% endif %}
+
+        <li>
+          <a class="dropdown-item d-flex align-items-center gap-2" href="mailto:{{ example_resume.email }}">
+            <i class="fa-solid fa-envelope"></i>
+            {{ example_resume.email }}
+          </a>
+        </li>
+
+        {% for social in example_resume.socials %}
+        <li>
+          <a class="dropdown-item d-flex align-items-center gap-2" href="{{ social.url }}" target="_blank">
+            {% if social.platform == "GitHub" %}
+            <i class="fa-brands fa-github"></i>
+            {% elseif social.platform == "LinkedIn" %}
+            <i class="fa-brands fa-linkedin"></i>
+            {% elseif social.platform == "Twitter" %}
+            <i class="fa-brands fa-x-twitter"></i>
+            {% elseif social.platform == "Instagram" %}
+            <i class="fa-brands fa-instagram"></i>
+            {% elseif social.platform == "Facebook" %}
+            <i class="fa-brands fa-facebook"></i>
+            {% elseif social.platform == "YouTube" %}
+            <i class="fa-brands fa-youtube"></i>
+            {% else %}
+            <i class="fa-solid fa-link"></i>
+            {% endif %}
+            {{ social.url | replace("https://", "") | replace("http://", "") }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <button id="download-resume-pdf-{{ layout }}"
+        class="btn btn-secondary">
+        <i class="bi bi-download"></i> Download Resume
+      </button>
     </div>
+
   </header>
 
   <!-- Summary -->
@@ -79,12 +102,12 @@
       <div class="d-flex flex-column flex-md-row justify-content-between">
         <strong>{{ job.company }}</strong>
         <span class="text-muted">
-          <i class="fa-solid fa-location-dot"></i> {{ job.location }}  
-          <i class="fa-solid fa-calendar ms-2"></i> {{ job.start_date | formatDate('YYYY') }} - 
+          <i class="fa-solid fa-location-dot"></i> {{ job.location }}
+          <i class="fa-solid fa-calendar ms-2"></i> {{ job.start_date | formatDate('YYYY') }} -
           {% if job.end_date | objtype == 'object' %}
-            {{ job.end_date | formatDate('YYYY') }}
+          {{ job.end_date | formatDate('YYYY') }}
           {% else %}
-            Present
+          Present
           {% endif %}
         </span>
       </div>
@@ -117,12 +140,13 @@
     <div class="col-md-7">
       <h2 class="h4 border-bottom pb-2">Education</h2>
       {% for edu in example_resume.education %}
-      <div class="mb-4"> 
+      <div class="mb-4">
         <h3 class="h5 pb-2">{{ edu.degree }}</h3>
         <div class="d-flex flex-column flex-md-row justify-content-between">
           <strong>{{ edu.institution }}</strong>
           <span class="text-muted">
-            <i class="fa-solid fa-calendar"></i> {{ edu.start_date | formatDate('YYYY') }} - {{ edu.end_date | formatDate('YYYY') }}
+            <i class="fa-solid fa-calendar"></i> {{ edu.start_date | formatDate('YYYY') }} - {{ edu.end_date |
+            formatDate('YYYY') }}
           </span>
         </div>
       </div>
@@ -133,7 +157,7 @@
     <div class="col-md-5">
       <h2 class="h4 border-bottom pb-2">Certifications</h2>
       {% for cert in example_resume.certifications %}
-      <div class="mb-4"> 
+      <div class="mb-4">
         <h3 class="h5 pb-2">{{ cert.name }}</h3>
         <div class="d-flex flex-column flex-md-row justify-content-between">
           <strong>{{ cert.authority }}</strong>
@@ -141,7 +165,8 @@
             <i class="fa-solid fa-calendar"></i> Issued: {{ cert.issue_date | formatDate('YYYY') }}
           </span>
         </div>
-        <p><a href="{{ cert.cred_url }}" target="_blank" class="text-decoration-none"><i class="fa-solid fa-link"></i> View Credential</a></p>
+        <p><a href="{{ cert.cred_url }}" target="_blank" class="text-decoration-none"><i class="fa-solid fa-link"></i>
+            View Credential</a></p>
       </div>
       {% endfor %}
     </div>
@@ -149,15 +174,13 @@
 </div>
 
 
-
-
-
-<!-- Resume Download Button  -->
-<button id="download-resume-pdf-{{ layout }}" class="btn btn-primary btn-lg position-fixed bottom-0 end-0 m-3 shadow-lg">
-  <i class="bi bi-download"></i> Download Resume
-</button>
-
-
-
 {% include "shared/footer.njk" %}
 <script src="./assets/main.js"></script>
+
+
+<div class="container py-2  my-0 border-top" id="footer">
+  <p class="text-start copyright">©{{ buildDate| formatDate('YYYY') }} {{ example_resume.name }} | This site was made
+    with <a href="https://github.com/j8nn3str/resume.doc.web">resume.doc.web</a>.</p>
+  <canvas data-class="qr" data-qr-id="siteQR" data-qr-text="profile.j8nn3str.me" height="50" width="50"
+    style="height: 50px; width: 50px;"></canvas>
+</div>
