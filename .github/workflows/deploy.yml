@@ -1,0 +1,31 @@
+name: Deploy Site
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js (choose the version you are using)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the project with Eleventy
+      - name: Build the Site with Eleventy
+        env:
+          RESUME: ${{ secrets.RESUME }}  # Use the GitHub Secret for resume data
+        run: npm run build
