@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel dev:*",
-    "build": "run-s prod:_",
+    "build": "run-s prod:*",
     "dev:eleventy": "eleventy --serve",
     "dev:parcel": "parcel watch ./src/_assets/js/main.js ./src/_assets/js/main__*.js --out-dir ./_site/assets",
     "prod:eleventy": "eleventy",
