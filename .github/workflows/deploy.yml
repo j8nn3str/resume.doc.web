@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (choose the version you are using)
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -27,5 +27,13 @@ jobs:
       # Step 4: Build the project with Eleventy
       - name: Build the Site with Eleventy
         env:
-          RESUME: ${{ secrets.RESUME }}  # Use the GitHub Secret for resume data
+          RESUME: ${{ secrets.RESUME }}
         run: npm run build
+
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
