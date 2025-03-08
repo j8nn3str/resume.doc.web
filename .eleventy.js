@@ -21,10 +21,7 @@ module.exports = function (eleventyConfig) {
     // Default to example_resume.yml (local development)
     let resumePath = path.join(__dirname, "src/_data/example_resume.yml");
     let resumeData;
-
-    // Get the repo name from GitHub Actions or default to "/"
-    const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split("/")[1] : "";
-    const pathPrefix = repoName ? `/${repoName}/` : "/";
+    
 
     if (process.env.CI && process.env.RESUME) {
         // In GitHub Actions, prefer the RESUME secret if available
@@ -58,6 +55,5 @@ module.exports = function (eleventyConfig) {
         markdownTemplateEngine: "njk",
         htmlTemplateEngine: "njk",
         dataTemplateEngine: "njk",
-        pathPrefix: pathPrefix 
     };
 };
