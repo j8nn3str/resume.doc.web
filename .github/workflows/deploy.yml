@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug RESUME Secret
+        run: echo "$RESUME"
+        env:
+          RESUME: ${{ secrets.RESUME }}
+          
+    
       # Step 1: Checkout the code
       - name: Checkout Repository
         uses: actions/checkout@v3
