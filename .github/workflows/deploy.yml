@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug RESUME Secret
-        run: echo "$RESUME"
-        env:
-          RESUME: ${{ secrets.RESUME }}
+      - name: Decode RESUME Secret
+        run: echo "${{ secrets.RESUME }}" | base64 --decode > resume.yml
           
     
       # Step 1: Checkout the code
